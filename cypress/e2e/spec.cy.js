@@ -27,7 +27,7 @@ describe('Automation Exercise', () => {
 
     cy.get('input#newsletter').click();
     cy.get('input#optin').click();
-        
+
     cy.get('input[data-qa="first_name"]').click().type('Vaidulis');
     cy.get('input[data-qa="last_name"]').click().type('test');
     cy.get('input[data-qa="company"]').click().type('kompanija');
@@ -79,23 +79,23 @@ describe('Automation Exercise', () => {
   });
 
   it('Test Case 3: Login User with incorrect email and password', () => {
-      cy.visit('https://automationexercise.com/');
-  
-      cy.url().should('eq', 'https://automationexercise.com/');
-      cy.get('body').should('be.visible');
-  
-      cy.get('ul.navbar-nav li').contains('Signup / Login').click();
-  
-      cy.url().should('eq', 'https://automationexercise.com/login');
-      cy.get('body').should('be.visible');
-      cy.get('.login-form').contains('Login to your account').should('be.visible');
-  
-      cy.get('input[data-qa="login-email"]').click().type('blogas@gmail.com');
-      cy.get('input[data-qa="login-password"]').click().type('blogaspass');
-      cy.get('button[data-qa="login-button"]').click();
+    cy.visit('https://automationexercise.com/');
 
-      cy.contains('Your email or password is incorrect!').should('be.visible');
-      
+    cy.url().should('eq', 'https://automationexercise.com/');
+    cy.get('body').should('be.visible');
+
+    cy.get('ul.navbar-nav li').contains('Signup / Login').click();
+
+    cy.url().should('eq', 'https://automationexercise.com/login');
+    cy.get('body').should('be.visible');
+    cy.get('.login-form').contains('Login to your account').should('be.visible');
+
+    cy.get('input[data-qa="login-email"]').click().type('blogas@gmail.com');
+    cy.get('input[data-qa="login-password"]').click().type('blogaspass');
+    cy.get('button[data-qa="login-button"]').click();
+
+    cy.contains('Your email or password is incorrect!').should('be.visible');
+
   });
 
   it('Test Case 4: Logout User', () => {
@@ -122,7 +122,7 @@ describe('Automation Exercise', () => {
 
     cy.url().should('eq', 'https://automationexercise.com/login');
     cy.get('body').should('be.visible');
-    
+
   });
 
   it('Test Case 5: Register User with existing email', () => {
@@ -144,5 +144,50 @@ describe('Automation Exercise', () => {
     cy.contains('Email Address already exist!').should('be.visible');
 
   });
-  
+
+  it('Test Case 6: Contact Us Form', () => {
+    cy.visit('https://automationexercise.com/');
+
+    cy.url().should('eq', 'https://automationexercise.com/');
+    cy.get('body').should('be.visible');
+
+    cy.get('a[href="/contact_us"]').click();
+
+    cy.contains('Get In Touch').should('be.visible');
+
+    cy.get('input[data-qa="name"]').click().type('Vaidulis');
+    cy.get('input[data-qa="email"]').click().type('vaidulistester@gmail.com');
+    cy.get('input[data-qa="subject"]').click().type('Tema');
+    cy.get('input[data-qa="message"]').click().type('Labai labai labai labai ilgas tekstas.');
+
+    cy.get('input.form-control').click().type('ane.png{enter}');
+
+    cy.get('button[data-qa="submit-button"]').click();
+
+    cy.on('window:confirm', (text) => {
+      expect(text).to.equal('Press OK to proceed!');
+      return true;
+    });
+
+    cy.contains('Success! Your details have been submitted successfully.').should('be.visible');
+
+    cy.get('a.btn-success').click();
+
+    cy.url().should('eq', 'https://automationexercise.com/');
+
+  });
+
+  it('Test Case 7: Verify Test Cases Page', () => {
+    cy.visit('https://automationexercise.com/');
+
+    cy.url().should('eq', 'https://automationexercise.com/');
+    cy.get('body').should('be.visible');
+
+    cy.get('a[href="/test_cases"]').click();
+
+    cy.url().should('eq', 'https://automationexercise.com/test_cases');
+    cy.get('body').should('be.visible');
+
+  });
+
 });
