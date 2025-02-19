@@ -120,8 +120,7 @@ describe('Automation Exercise', () => {
 
   });
 
-  it('Test Case 2: Login User with correct email and password', () => {
-    cy.createUser();
+  it('Test Case 2: Login User with correct email and password', () => {    
     cy.visit('https://automationexercise.com/');
 
     cy.url().should('eq', 'https://automationexercise.com/');
