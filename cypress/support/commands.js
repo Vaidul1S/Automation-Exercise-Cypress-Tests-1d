@@ -49,6 +49,8 @@ Cypress.Commands.add('createUser', () => {
     cy.log('atlikta');
 });
 
+import 'cypress-file-upload';
+
 //
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
