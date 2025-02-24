@@ -21,7 +21,7 @@ describe('Automation Exercise', () => {
     cy.contains('Enter Account Information').should('be.visible');
 
     cy.get('input#id_gender1').click();
-    // cy.get('input[data-qa="name"]').dblclick().type('Vaidulis');    
+    // cy.get('input[data-qa="name"]').dblclick().clear().type('Vaidulis');    
     cy.get('input[data-qa="password"]').click().type('Vaidulis123');
     cy.get('select#days').select('13');
     cy.get('select#months').select('February');
