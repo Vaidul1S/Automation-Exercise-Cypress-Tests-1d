@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('Automation Exercise', () => {
 
   it('Test Case 1: Register User', () => {
