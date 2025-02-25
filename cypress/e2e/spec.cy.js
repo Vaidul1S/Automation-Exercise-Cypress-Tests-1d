@@ -476,6 +476,8 @@ describe('Automation Exercise', () => {
   });
 
   it('Test Case 16: Place Order: Login before Checkout', () => {
+    cy.createUser();
+    
     cy.visit('https://automationexercise.com/');
 
     cy.url().should('eq', 'https://automationexercise.com/');
