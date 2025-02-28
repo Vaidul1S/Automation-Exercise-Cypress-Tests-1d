@@ -14,14 +14,13 @@ describe('Automation Exercise', () => {
     cy.get('body').should('be.visible');
     cy.get('.signup-form').contains('New User Signup!').should('be.visible');
 
-    cy.get('input[data-qa="signup-name"]').click().type('Vaidulis');
-    cy.get('input[data-qa="signup-email"]').click().type('vaidulistester@gmail.com');
+    cy.get('input[data-qa="signup-name"]').click().type('Bebras666');
+    cy.get('input[data-qa="signup-email"]').click().type('bebras666@example.com');
     cy.get('button[data-qa="signup-button"]').click();
 
     cy.contains('Enter Account Information').should('be.visible');
 
-    cy.get('input#id_gender1').click();
-    // cy.get('input[data-qa="name"]').dblclick().clear().type('Vaidulis');    
+    cy.get('input#id_gender1').click();        
     cy.get('input[data-qa="password"]').click().type('Vaidulis123');
     cy.get('select#days').select('13');
     cy.get('select#months').select('February');
@@ -47,7 +46,7 @@ describe('Automation Exercise', () => {
 
     cy.get('[data-qa="continue-button"]').click();
 
-    cy.contains('Logged in as Vaidulis').should('be.visible');
+    cy.contains('Logged in as Bebras666').should('be.visible');
 
     cy.contains('Delete Account').click();
 
@@ -277,7 +276,7 @@ describe('Automation Exercise', () => {
     
     cy.get('.productinfo').eq(0).trigger('mouseover');
     cy.wait(1000);
-    cy.get('div.productinfo').eq(0).contains('Add to cart').click(); // reikia pataisyti tinkamai
+    cy.get('div.productinfo').eq(0).contains('Add to cart').click(); // reikia pataisyti tinkamai overlay neislenda
     cy.get('[data-dismiss="modal"]').click();
     
     cy.get('div.productinfo').eq(1).trigger('mouseover');
