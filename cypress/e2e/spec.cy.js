@@ -20,7 +20,7 @@ describe('Automation Exercise', () => {
 
     cy.contains('Enter Account Information').should('be.visible');
 
-    cy.get('input#id_gender1').click();        
+    cy.get('input#id_gender1').click();
     cy.get('input[data-qa="password"]').click().type('Vaidulis123');
     cy.get('select#days').select('13');
     cy.get('select#months').select('February');
@@ -121,7 +121,7 @@ describe('Automation Exercise', () => {
 
   });
 
-  it('Test Case 2: Login User with correct email and password', () => {    
+  it('Test Case 2: Login User with correct email and password', () => {
     cy.visit('https://automationexercise.com/');
 
     cy.url().should('eq', 'https://automationexercise.com/');
@@ -246,7 +246,7 @@ describe('Automation Exercise', () => {
     cy.get('#subscribe').click();
 
     cy.get('div.alert-success').contains('You have been successfully subscribed!').should('be.visible');
-    
+
   });
 
   it('Test Case 11: Verify Subscription in Cart page', () => {
@@ -266,27 +266,27 @@ describe('Automation Exercise', () => {
 
   });
 
-  it.only('Test Case 12: Add Products in Cart', () => {
+  it('Test Case 12: Add Products in Cart', () => {
     cy.visit('https://automationexercise.com/');
 
     cy.url().should('eq', 'https://automationexercise.com/');
     cy.get('body').should('be.visible');
 
     cy.get('ul.navbar-nav li').contains('Products').click();
-    
+
     cy.get('.productinfo').eq(0).trigger('mouseover');
     cy.wait(600);
-    cy.get('div.product-overlay').eq(0).contains('Add to cart').click({force: true}); 
+    cy.get('div.product-overlay').eq(0).contains('Add to cart').click({ force: true });
     cy.get('[data-dismiss="modal"]').click();
-    
+
     cy.get('div.productinfo').eq(1).trigger('mouseover');
     cy.wait(600);
-    cy.get('div.product-overlay').eq(1).contains('Add to cart').click({force: true});
+    cy.get('div.product-overlay').eq(1).contains('Add to cart').click({ force: true });
     cy.get('div.modal-body a[href="/view_cart"]').click();
 
     cy.get('tbody').contains('Blue Top').should('be.visible');
     cy.get('tbody').contains('Men Tshirt').should('be.visible');
-    
+
     cy.get('#product-1 .cart_price').contains('Rs. 500');
     cy.get('#product-1 .cart_quantity').contains('1');
     cy.get('#product-1 .cart_total').contains('Rs. 500');
@@ -348,7 +348,7 @@ describe('Automation Exercise', () => {
 
     cy.contains('Enter Account Information').should('be.visible');
 
-    cy.get('input#id_gender1').click();     
+    cy.get('input#id_gender1').click();
     cy.get('input[data-qa="password"]').click().type('bebras123');
     cy.get('select#days').select('13');
     cy.get('select#months').select('February');
@@ -368,7 +368,7 @@ describe('Automation Exercise', () => {
     cy.get('input[data-qa="zipcode"]').click().type('1234567890');
     cy.get('input[data-qa="mobile_number"]').click().type('1234567890');
 
-    cy.get('button[data-qa="create-account"]').click();    
+    cy.get('button[data-qa="create-account"]').click();
     cy.get('[data-qa="continue-button"]').click();
 
     cy.contains('Logged in as Bredas').should('be.visible');
@@ -391,14 +391,14 @@ describe('Automation Exercise', () => {
     cy.get('button[data-qa="pay-button"]').click();
 
     cy.contains('Congratulations! Your order has been confirmed!').should('be.visible');
-    
+
     cy.contains('Delete Account').click();
 
     cy.contains('Account Deleted!').should('be.visible');
 
   });
 
-  it('Test Case 15: Place Order: Register before Checkout', () => {
+  it.only('Test Case 15: Place Order: Register before Checkout', () => {
     cy.visit('https://automationexercise.com/');
 
     cy.url().should('eq', 'https://automationexercise.com/');
@@ -412,7 +412,7 @@ describe('Automation Exercise', () => {
 
     cy.contains('Enter Account Information').should('be.visible');
 
-    cy.get('input#id_gender1').click();     
+    cy.get('input#id_gender1').click();
     cy.get('input[data-qa="password"]').click().type('bebras123');
     cy.get('select#days').select('13');
     cy.get('select#months').select('February');
@@ -432,7 +432,7 @@ describe('Automation Exercise', () => {
     cy.get('input[data-qa="zipcode"]').click().type('1234567890');
     cy.get('input[data-qa="mobile_number"]').click().type('1234567890');
 
-    cy.get('button[data-qa="create-account"]').click();    
+    cy.get('button[data-qa="create-account"]').click();
     cy.get('[data-qa="continue-button"]').click();
 
     cy.contains('Logged in as Bredas').should('be.visible');
@@ -464,10 +464,24 @@ describe('Automation Exercise', () => {
     cy.get('[data-qa="expiry-month"]').click().type('10');
     cy.get('[data-qa="expiry-year"]').click().type('2030');
 
+    cy.get('form#payment-form').then(($form) => {
+      $form.on('submit', (e) => {
+        e.preventDefault();
+      });
+    });
+    
+    cy.get('[data-qa="pay-button"]').click();
+    
+    cy.get("#success_message > .alert-success").should("contain.text", "Your order has been placed successfully!");
+
+    cy.get('form#payment-form').then(($form) => {
+      $form.off('submit');
+    });
+
     cy.get('button[data-qa="pay-button"]').click();
 
     cy.contains('Congratulations! Your order has been confirmed!').should('be.visible');
-    
+
     cy.contains('Delete Account').click();
 
     cy.contains('Account Deleted!').should('be.visible');
@@ -476,14 +490,14 @@ describe('Automation Exercise', () => {
 
   it('Test Case 16: Place Order: Login before Checkout', () => {
     cy.createUser();
-    
+
     cy.visit('https://automationexercise.com/');
 
     cy.url().should('eq', 'https://automationexercise.com/');
     cy.get('body').should('be.visible');
 
     cy.get('a[href="/login"]').contains('Signup / Login').click();
-    
+
     cy.get('body').should('be.visible');
     cy.get('.login-form').contains('Login to your account').should('be.visible');
 
@@ -523,7 +537,7 @@ describe('Automation Exercise', () => {
     cy.get('button[data-qa="pay-button"]').click();
 
     cy.contains('Congratulations! Your order has been confirmed!').should('be.visible');
-    
+
     cy.contains('Delete Account').click();
 
     cy.contains('Account Deleted!').should('be.visible');
@@ -556,7 +570,7 @@ describe('Automation Exercise', () => {
 
   it('Test Case 18: View Category Products', () => {
     cy.visit('https://automationexercise.com/');
-    
+
     cy.contains('Category').should('be.visible');
 
     cy.get('div.panel-heading').contains('Women').click();
@@ -620,7 +634,7 @@ describe('Automation Exercise', () => {
     });
 
     cy.get('a[href="/login"]').contains('Signup / Login').click();
-        
+
     cy.get('input[data-qa="login-email"]').click().type('vaidulistester@test.com');
     cy.get('input[data-qa="login-password"]').click().type('Vaidulis123');
     cy.get('button[data-qa="login-button"]').click();
