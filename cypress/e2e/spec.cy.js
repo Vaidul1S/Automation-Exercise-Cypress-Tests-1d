@@ -266,7 +266,7 @@ describe('Automation Exercise', () => {
 
   });
 
-  it('Test Case 12: Add Products in Cart', () => {
+  it.only('Test Case 12: Add Products in Cart', () => {
     cy.visit('https://automationexercise.com/');
 
     cy.url().should('eq', 'https://automationexercise.com/');
@@ -275,13 +275,13 @@ describe('Automation Exercise', () => {
     cy.get('ul.navbar-nav li').contains('Products').click();
     
     cy.get('.productinfo').eq(0).trigger('mouseover');
-    cy.wait(1000);
-    cy.get('div.productinfo').eq(0).contains('Add to cart').click(); // reikia pataisyti tinkamai overlay neislenda
+    cy.wait(600);
+    cy.get('div.product-overlay').eq(0).contains('Add to cart').click({force: true}); 
     cy.get('[data-dismiss="modal"]').click();
     
     cy.get('div.productinfo').eq(1).trigger('mouseover');
-    cy.wait(1000);
-    cy.get('div.productinfo').eq(1).contains('Add to cart').click();
+    cy.wait(600);
+    cy.get('div.product-overlay').eq(1).contains('Add to cart').click({force: true});
     cy.get('div.modal-body a[href="/view_cart"]').click();
 
     cy.get('tbody').contains('Blue Top').should('be.visible');
