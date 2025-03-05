@@ -248,7 +248,9 @@ describe('Automation Exercise API testing', () => {
         cy.request({
             method: 'POST',
             url: 'https://automationexercise.com/api/createAccount',
-            form: true,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
             body: user
         })
             .then((response) => {
@@ -283,7 +285,9 @@ describe('Automation Exercise API testing', () => {
         cy.request({
             method: 'PUT',
             url: 'https://automationexercise.com/api/updateAccount',
-            form: true,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
             body: user
         })
             .then((response) => {
@@ -356,7 +360,9 @@ describe('Automation Exercise API testing', () => {
         cy.request({
             method: 'DELETE',
             url: 'https://automationexercise.com/api/deleteAccount',
-            form: true,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
             body: user
         })
             .then((response) => {

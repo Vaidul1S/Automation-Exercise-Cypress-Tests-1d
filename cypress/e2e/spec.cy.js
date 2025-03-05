@@ -398,7 +398,7 @@ describe('Automation Exercise', () => {
 
   });
 
-  it.only('Test Case 15: Place Order: Register before Checkout', () => {
+  it('Test Case 15: Place Order: Register before Checkout', () => {
     cy.visit('https://automationexercise.com/');
 
     cy.url().should('eq', 'https://automationexercise.com/');
