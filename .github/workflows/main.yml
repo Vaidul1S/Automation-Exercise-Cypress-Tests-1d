@@ -18,5 +18,5 @@ jobs:
       with:
           node-version: '22'
              
-    - run: npm start &
-    - run: npx cypress run
+    - name: Run Cypress
+      run: npx cypress run
