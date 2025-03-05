@@ -11,12 +11,17 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [22.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
     steps:
     - uses: actions/checkout@v4
-    - name: Install node.js
+    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
-          node-version: '22'
-             
-    - name: Run Cypress
-      run: npx cypress run
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci    
+    - run: npx cypress run
