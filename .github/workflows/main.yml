@@ -1,4 +1,4 @@
-name: Automation Exercise 20 Test Cases
+name: Automation Exercise 20 Cypress Web and 14 API Test Cases 
 
 on:
   push:
