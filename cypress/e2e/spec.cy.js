@@ -636,7 +636,6 @@ describe('Automation Exercise', () => {
     cy.get('input[data-qa="login-email"]').click().type('vaidulistester@test.com');
     cy.get('input[data-qa="login-password"]').click().type('Vaidulis123');
     cy.get('button[data-qa="login-button"]').click();
-
     cy.contains('Logged in as VaidulisTest').should('be.visible');
 
     cy.get('ul.navbar-nav li').contains('Cart').click();
