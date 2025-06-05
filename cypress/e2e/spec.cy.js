@@ -609,7 +609,6 @@ describe('Automation Exercise', () => {
     cy.createUser();
 
     cy.visit('https://automationexercise.com/');
-
     cy.get('ul.navbar-nav li').contains('Products').click();
     cy.url().should('eq', 'https://automationexercise.com/products');
 
@@ -617,7 +616,6 @@ describe('Automation Exercise', () => {
     cy.get('button#submit_search').click();
 
     cy.contains('Searched Products').should('be.visible');
-
     cy.get('.productinfo').each(($p) => {
       cy.wrap($p).should('contain', 'Jeans').and('is.visible');
     });
