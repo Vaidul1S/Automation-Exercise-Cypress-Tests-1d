@@ -1,4 +1,4 @@
-name: Automation Exercise 20 Test Cases
+name: Automation Exercise 20 Cypress Web and 14 API Test Cases 
 
 on:
   push:
@@ -11,17 +11,11 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+        node-version: '22'        
     - run: npm ci    
     - run: npx cypress run
